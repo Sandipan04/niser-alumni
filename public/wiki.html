@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Documentation | NISER Alumni Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.3/purify.min.js"></script>
+
+    <style>
+        /* Wiki Specific Styles */
+        .markdown-body h1 { font-size: 2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); }
+        .markdown-body h2 { font-size: 1.5rem; font-weight: 600; color: var(--primary); margin-top: 2rem; margin-bottom: 1rem; }
+        .markdown-body h3 { font-size: 1.25rem; font-weight: 600; color: var(--text-dark); margin-top: 1.5rem; }
+        .markdown-body p, .markdown-body li { font-size: 0.95rem; line-height: 1.7; color: #334155; }
+        .markdown-body code { background: rgba(0,0,0,0.05); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.85em; color: #d926a9; }
+        .markdown-body pre { background: #1e293b; padding: 1rem; border-radius: 12px; overflow-x: auto; margin: 1.5rem 0; }
+        .markdown-body pre code { background: transparent; color: #e2e8f0; padding: 0; }
+        .markdown-body blockquote { border-left: 4px solid var(--primary); padding-left: 1rem; color: #64748b; font-style: italic; background: rgba(79, 70, 229, 0.05); padding: 1rem; border-radius: 0 8px 8px 0; }
+        .wiki-active { background-color: var(--primary-soft); color: var(--primary) !important; font-weight: 600; border-right: 3px solid var(--primary); }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <div class="mobile-header px-4 py-3 shadow-sm d-lg-none" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1040; position: sticky; top: 0;">
+        <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-light border-0 shadow-sm" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+            <span class="fw-bold fs-5 text-primary">Documentation</span>
+        </div>
+    </div>
+
+    <div class="sidebar-container" id="sidebar">
+        <div style="padding: 2rem 1.5rem 0 1.5rem;">
+            <div class="brand-title justify-content-between mb-4">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fas fa-book text-primary"></i>
+                    <span>Wiki Docs</span>
+                </div>
+                <button class="btn btn-sm btn-light d-lg-none" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <a href="index.html" class="btn btn-outline-secondary w-100 mb-4 d-flex justify-content-center align-items-center gap-2" style="border-radius: 8px;">
+                <i class="fas fa-arrow-left"></i> Back to Directory
+            </a>
+        </div>
+
+        <div class="sidebar-scroll-area pt-0">
+            <div class="nav-label">Platform Guides</div>
+            <nav class="nav flex-column gap-1 mb-4">
+                <a href="#" class="nav-link text-dark py-2 px-3 rounded wiki-link wiki-active" data-file="user-guide"><i class="fas fa-user text-muted me-2 w-15px"></i> User Guide</a>
+                <a href="#" class="nav-link text-dark py-2 px-3 rounded wiki-link" data-file="admin-guide"><i class="fas fa-shield-alt text-muted me-2 w-15px"></i> Admin Guide</a>
+                <a href="#" class="nav-link text-dark py-2 px-3 rounded wiki-link" data-file="developer-guide"><i class="fas fa-code text-muted me-2 w-15px"></i> Developer Guide</a>
+            </nav>
+
+            <div class="nav-label">Legal</div>
+            <nav class="nav flex-column gap-1">
+                <a href="#" class="nav-link text-dark py-2 px-3 rounded wiki-link" data-file="terms"><i class="fas fa-file-contract text-muted me-2 w-15px"></i> Terms of Service</a>
+                <a href="#" class="nav-link text-dark py-2 px-3 rounded wiki-link" data-file="privacy"><i class="fas fa-user-shield text-muted me-2 w-15px"></i> Privacy Policy</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="scroll-wrapper pt-4">
+            <div class="glass-panel" style="max-width: 900px; margin: 0 auto; min-height: 85vh;">
+                <div id="wiki-content" class="markdown-body px-md-4 py-md-2">
+                    <div class="text-center py-5"><div class="spinner-border text-primary"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/wiki.js"></script>
+</body>
+</html>

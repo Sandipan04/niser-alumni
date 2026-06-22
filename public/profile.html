@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Alumni Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+<div class="container py-5" style="max-width: 1000px;">
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="index.html" class="text-decoration-none text-muted fw-semibold">
+            <i class="fas fa-arrow-left me-2"></i> Back to Directory
+        </a>
+        <button id="btnEdit" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+            <i class="fas fa-edit me-1"></i> Request Edit
+        </button>
+    </div>
+
+    <div id="statusContainer" class="text-center mt-5">
+        <div class="spinner-border text-primary" role="status"></div>
+        <div class="mt-2 text-muted">Loading profile...</div>
+    </div>
+
+    <div id="profileContainer" class="d-none">
+        <div class="row g-4">
+            
+            <div class="col-lg-4">
+                <div class="sticky-top" style="top: 2rem; z-index: 1;">
+                    <div class="card-custom shadow-sm p-4 text-center mb-3">
+                        <div id="pAvatar" class="mb-3 d-flex justify-content-center"></div>
+                        
+                        <h4 id="pName" class="fw-bold text-dark mb-1"></h4>
+                        <div id="pPosition" class="text-primary fw-medium small mb-3"></div>
+                        
+                        <div id="pSocial" class="d-flex justify-content-center gap-2 mb-2"></div>
+                        <div id="pSocialText" class="text-center small text-muted mb-4 d-none"></div>
+                        
+                        <hr class="text-muted opacity-25">
+                        
+                        <div class="text-start mt-4">
+                            <h6 class="fw-bold text-muted small text-uppercase mb-3">Contact Info</h6>
+                            <div class="d-flex flex-column gap-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="text-primary" style="width: 20px;"><i class="fas fa-envelope"></i></div>
+                                    <div id="pPermEmail" class="small text-break fw-medium"></div>
+                                </div>
+                                <div id="blockNiserEmail" class="d-flex align-items-center gap-3">
+                                    <div class="text-muted" style="width: 20px;"><i class="fas fa-university"></i></div>
+                                    <div id="pNiserEmail" class="small text-break"></div>
+                                </div>
+                                <div id="blockProfEmail" class="d-flex align-items-center gap-3">
+                                    <div class="text-muted" style="width: 20px;"><i class="fas fa-briefcase"></i></div>
+                                    <div id="pProfEmail" class="small text-break"></div>
+                                </div>
+                                <div id="blockPhone" class="d-flex align-items-center gap-3">
+                                    <div class="text-muted" style="width: 20px;"><i class="fas fa-phone"></i></div>
+                                    <div id="pPhone" class="small"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="pUpdated" class="text-center small text-muted"></div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                
+                <div class="card-custom shadow-sm p-4 mb-4">
+                    <h5 class="fw-bold text-primary border-bottom pb-2 mb-4"><i class="fas fa-graduation-cap me-2"></i> NISER Details</h5>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <small class="text-muted d-block mb-1">Programme</small>
+                            <div id="pProg" class="fw-medium text-dark"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <small class="text-muted d-block mb-1">Batch (Years)</small>
+                            <div id="pBatch" class="fw-medium text-dark"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <small class="text-muted d-block mb-1">Department</small>
+                            <div id="pDept" class="fw-medium text-dark"></div>
+                        </div>
+                        <div class="col-12">
+                            <small class="text-muted d-block mb-1">NISER Supervisor</small>
+                            <div id="pSupervisor" class="fw-medium text-dark"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-custom shadow-sm p-4 mb-4">
+                    <h5 class="fw-bold text-primary border-bottom pb-2 mb-4"><i class="fas fa-briefcase me-2"></i> Professional & Research</h5>
+                    <div class="d-flex flex-column gap-4">
+                        <div>
+                            <small class="text-muted d-block mb-1">Current Institute / Company</small>
+                            <div id="pInstitute" class="fw-medium text-dark"></div>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Research & Academic Interests</small>
+                            <div id="pInterests" class="fw-medium text-dark"></div>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">Career Path</small>
+                            <div id="pPath" class="fw-medium text-dark"></div>
+                        </div>
+                        <div id="blockFuture">
+                            <small class="text-muted d-block mb-1">Future Plans</small>
+                            <div id="pPlans" class="fw-medium text-dark"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pExtrasCard" class="card-custom shadow-sm p-4 bg-light d-none">
+                    <div id="pCommentsSection" class="d-none">
+                        <h6 class="fw-bold text-primary mb-3"><i class="fas fa-comment-dots me-2"></i> Message to the Batch</h6>
+                        <blockquote id="pComments" class="fst-italic text-dark mb-0 border-start border-3 border-primary ps-3"></blockquote>
+                    </div>
+
+                    <div id="pAdditionalSection" class="d-none">
+                        <h6 class="fw-bold text-primary mb-2"><i class="fas fa-info-circle me-2"></i> Additional Information</h6>
+                        <div id="pAdditional" class="text-dark small"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="fas fa-edit me-2"></i> Request Profile Update</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body bg-light">
+                <div class="alert alert-info small mb-4">
+                    <i class="fas fa-info-circle me-1"></i> Submitting this form will send an update request to the admins. Your live profile will change once they approve it.
+                </div>
+
+                <div class="card-custom shadow-sm p-4">
+                    <div class="row g-3">
+                        <div class="col-12"><h6 class="fw-bold text-primary border-bottom pb-2">Contact Info</h6></div>
+                        <div class="col-md-6"><label class="form-label">Permanent Email *</label><input type="email" id="uPermEmail" class="form-control" required></div>
+                        <div class="col-md-6"><label class="form-label">NISER Email</label><input type="email" id="uNiserEmail" class="form-control"></div>
+                        <div class="col-md-6"><label class="form-label">Professional Email</label><input type="email" id="uProfEmail" class="form-control"></div>
+                        <div class="col-md-6"><label class="form-label">Phone Number</label><input type="text" id="uPhone" class="form-control"></div>
+                        <div class="col-md-12"><label class="form-label">Other Emails</label><input type="text" id="uOtherEmails" class="form-control" placeholder="Comma separated"></div>
+                        <div class="col-md-12"><label class="form-label">Social Media Links</label><input type="text" id="uSocial" class="form-control" placeholder="Comma separated URLs"></div>
+
+                        <div class="col-12"><h6 class="fw-bold text-primary border-bottom pb-2 mt-3">Professional & Research</h6></div>
+                        <div class="col-md-6"><label class="form-label">Current Position</label><input type="text" id="uPosition" class="form-control"></div>
+                        <div class="col-md-6"><label class="form-label">Institute / Company</label><input type="text" id="uInstitute" class="form-control"></div>
+                        <div class="col-md-12"><label class="form-label">Research Interests</label><input type="text" id="uInterests" class="form-control"></div>
+                        <div class="col-md-6"><label class="form-label">Career Path</label><input type="text" id="uCareer" class="form-control"></div>
+                        <div class="col-md-6"><label class="form-label">Future Plans</label><input type="text" id="uFuture" class="form-control"></div>
+                        <div class="col-md-12"><label class="form-label">NISER Supervisor</label><input type="text" id="uSupervisor" class="form-control"></div>
+
+                        <div class="col-12"><h6 class="fw-bold text-primary border-bottom pb-2 mt-3">Additional Info</h6></div>
+                        
+                        <div class="col-md-12">
+                            <label class="form-label">Profile Photo</label>
+                            <div class="d-flex gap-3 align-items-center" id="photoPreviewContainer">
+                                <input type="file" id="inFile" class="form-control w-auto" accept="image/png, image/jpeg, image/webp">
+                                <input type="hidden" id="uPhoto"> 
+                            </div>
+                            <div class="form-text small">Upload a new photo to replace your current one. Max size: 5MB.</div>
+                        </div>
+
+                        <div class="col-md-6"><label class="form-label">Message to Batch</label><textarea id="uComments" class="form-control" rows="2"></textarea></div>
+                        <div class="col-md-6"><label class="form-label">Additional Info</label><textarea id="uInfo" class="form-control" rows="2"></textarea></div>
+
+                        <div class="col-md-12 mt-4 pt-3 border-top">
+                            <div class="form-check">
+                                <input class="form-check-input border-primary" type="checkbox" id="uConsentCheck">
+                                <label class="form-check-label text-muted small" for="uConsentCheck">
+                                    I give permission to update my public data with these changes.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="uStatusMsg" class="mt-3 text-center fw-bold"></div>
+            </div>
+            <div class="modal-footer border-top-0">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="btnSubmitUpdate" class="btn btn-primary" disabled>Submit Update Request</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cropModal" data-bs-backdrop="static" tabindex="-1" style="z-index: 1060;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title">Crop Profile Picture</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center p-3">
+                <div style="max-height: 400px; overflow: hidden;">
+                    <img id="imageToCrop" style="max-width: 100%; display: block;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="btnCropUpload" class="btn btn-primary"><i class="fas fa-upload me-1"></i> Crop & Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="js/profile.js"></script>
+</body>
+</html>

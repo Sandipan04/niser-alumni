@@ -1,0 +1,268 @@
+/* css/style.css */
+
+/* --- GLOBAL VARIABLES & RESET --- */
+:root {
+    --primary: #4f46e5; /* Indigo */
+    --primary-soft: #e0e7ff;
+    --text-dark: #0f172a;
+    --text-gray: #64748b;
+    --bg-glass: rgba(255, 255, 255, 0.85);
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --border-color: rgba(255, 255, 255, 0.5);
+    --hover-bg: rgba(255, 255, 255, 0.6);
+    --sidebar-width: 280px;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    background-image: url('/assets/bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--text-dark);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* --- SIDEBAR CONFIGURATION --- */
+.sidebar-container {
+    position: fixed;
+    top: 1.5rem; /* This is the anchor point for the Top Bar alignment */
+    left: 1.5rem;
+    height: calc(100vh - 3rem);
+    width: var(--sidebar-width);
+    background-color: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1050;
+    transition: transform 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.brand-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-scroll-area {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.sidebar-scroll-area::-webkit-scrollbar {
+    width: 5px;
+}
+.sidebar-scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.nav-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-gray);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.8rem;
+}
+
+.sidebar-footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.hover-primary:hover {
+    color: var(--primary) !important;
+}
+.transition-hover {
+    transition: all 0.2s ease-in-out;
+}
+.transition-hover:hover {
+    transform: translateY(-2px);
+    background-color: var(--primary-soft) !important;
+    color: var(--primary) !important;
+    border-color: var(--primary-soft) !important;
+}
+
+/* --- NEW UNIFIED MAIN LAYOUT --- */
+.main-content {
+    margin-left: calc(var(--sidebar-width) + 1.5rem);
+    height: 100dvh; /* Locks height to viewport */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Forces exact 1.5rem alignment with the sidebar's top: 1.5rem */
+.topbar-wrapper {
+    padding: 1.5rem 1.5rem 0.5rem 1.5rem; 
+    z-index: 1000;
+    background-color: transparent;
+}
+
+.glass-panel {
+    background-color: rgba(255, 255, 255, 0.90);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: var(--card-shadow);
+    padding: 1.5rem;
+}
+
+.filter-container {
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Custom rounded corners for the search bar & dropdowns */
+.filter-input {
+    border-radius: 10px !important;
+}
+.filter-input-left {
+    border-radius: 10px 0 0 10px !important;
+}
+.filter-input-right {
+    border-radius: 0 10px 10px 0 !important;
+}
+
+/* The independent scrollable area below the glass panel */
+.scroll-wrapper {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0 1.5rem 3rem 1.5rem;
+}
+
+/* Hide scrollbar for clean aesthetic */
+.scroll-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+.scroll-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.15);
+    border-radius: 10px;
+}
+
+/* --- CARDS & FORMS --- */
+.card-custom {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+.form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.form-control,
+.form-select,
+.input-group-text,
+textarea.form-control {
+    border-radius: 8px;
+    border: 1px solid var(--border-color) !important;
+    padding: 0.7rem;
+    font-size: 0.95rem;
+    background-color: rgba(0, 0, 0, 0.03) !important; 
+    color: var(--text-dark) !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea.form-control:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px var(--primary-soft) !important;
+    background-color: #fff !important; 
+    color: var(--text-dark) !important;
+}
+
+.btn-primary-custom {
+    background-color: var(--primary);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    color: white;
+    transition: 0.2s;
+}
+
+.btn-primary-custom:hover {
+    background-color: #4338ca;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.admin-access-btn:hover {
+    background-color: #fee2e2 !important;
+    color: #dc2626 !important;
+    border-color: #fca5a5 !important;
+}
+
+/* --- RESPONSIVE MOBILE ADJUSTMENTS --- */
+@media (max-width: 991px) {
+    .sidebar-container {
+        transform: translateX(-120%);
+        top: 0;
+        left: 0;
+        height: 100%;
+        border-radius: 0;
+        z-index: 1050;
+    }
+    .sidebar-container.active {
+        transform: translateX(0);
+    }
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(15, 23, 42, 0.4);
+        backdrop-filter: blur(4px);
+        z-index: 1040;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    .sidebar-overlay.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        height: calc(100dvh - 60px); /* Account for mobile header */
+    }
+    .topbar-wrapper {
+        padding: 1rem 1rem 0.5rem 1rem;
+    }
+    .glass-panel {
+        padding: 1rem;
+    }
+    .scroll-wrapper {
+        padding: 0 1rem 3rem 1rem;
+    }
+}
