@@ -15,13 +15,6 @@
 
     <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-    <div class="mobile-header px-4 py-3 shadow-sm d-lg-none" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1040; position: sticky; top: 0;">
-        <div class="d-flex align-items-center gap-3">
-            <button class="btn btn-light border-0 shadow-sm" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-            <span class="fw-bold fs-5 text-primary">Alumni Hub</span>
-        </div>
-    </div>
-
     <div class="sidebar-container" id="sidebar">
         <div style="padding: 2rem 1.5rem 0 1.5rem;">
             <div class="brand-title justify-content-between mb-3">
@@ -46,7 +39,7 @@
                             <i class="fas fa-paper-plane"></i> DM Admin
                         </button>
                     </span>
-                    <a href="wiki.html" class="btn btn-outline-secondary flex-grow-1 d-flex align-items-center justify-content-center gap-2"
+                    <a href="doc.html?file=guide" class="btn btn-outline-secondary flex-grow-1 d-flex align-items-center justify-content-center gap-2"
                         data-bs-toggle="tooltip" data-bs-placement="top" title="Documentation Wiki"
                         style="padding: 0.75rem; border-radius: 8px; font-weight: 500;">
                         <i class="fas fa-book-open"></i> Guide
@@ -64,8 +57,8 @@
 
         <div class="sidebar-footer" style="padding-top: 1.5rem;">
             <div class="d-flex justify-content-center gap-3 mb-3">
-                <a href="wiki.html?file=terms" class="text-decoration-none text-muted small hover-primary"><i class="fas fa-file-contract me-1"></i> Terms</a>
-                <a href="wiki.html?file=privacy" class="text-decoration-none text-muted small hover-primary"><i class="fas fa-user-shield me-1"></i> Privacy</a>
+                <a href="doc.html?file=terms" class="text-decoration-none text-muted small hover-primary"><i class="fas fa-file-contract me-1"></i> Terms</a>
+                <a href="doc.html?file=privacy" class="text-decoration-none text-muted small hover-primary"><i class="fas fa-user-shield me-1"></i> Privacy</a>
             </div>
 
             <a href="admin.html" class="btn btn-sm w-100 d-flex align-items-center justify-content-center gap-2 text-secondary admin-access-btn"
@@ -82,7 +75,7 @@
             </div>
 
             <div class="text-center mt-3 px-2" style="font-size: 0.6rem; color: #4b535e; line-height: 1.4;">
-                Note: This directory is designed to help students connect. Please be sensible and avoid spamming.
+                Note: This directory is designed to help students connect. Please be sensible and avoid spamming, overloading the system with automated requests or any kind of cyber attacks.
             </div>
         </div>
     </div>
@@ -90,45 +83,53 @@
     <div class="main-content">
         
         <div class="topbar-wrapper">
-            <div class="glass-panel">
-                
-                <div class="d-flex justify-content-between align-items-center mb-4 ps-2">
-                    <div>
-                        <h3 class="fw-bold mb-1 text-dark" style="letter-spacing: -0.02em;">Alumni Directory</h3>
-                        <div class="text-muted small">Browse and connect with NISER graduates.</div>
-                    </div>
-                </div>
-
-                <div class="filter-container">
+            <div class="glass-panel py-3"> <div class="filter-container mb-0 border-0 p-0 bg-transparent">
                     <div class="row g-2">
-                        <div class="col-md-3">
-                            <div class="input-group">
+                        
+                        <div class="col-12 col-lg-3 d-flex gap-2">
+                            
+                            <button class="btn btn-primary-custom d-lg-none filter-input px-3 shadow-sm" onclick="toggleSidebar()" title="Open Menu" style="padding: 0.7rem 1rem;">
+                                <i class="fas fa-bars"></i>
+                            </button>
+
+                            <div class="input-group flex-grow-1 shadow-sm" style="border-radius: 10px;">
                                 <span class="input-group-text bg-white border-end-0 filter-input-left"><i class="fas fa-search text-muted"></i></span>
                                 <input type="text" id="searchInput" class="form-control border-start-0 ps-0 filter-input-right" placeholder="Search names...">
                             </div>
+
+                            <button class="btn btn-outline-secondary d-lg-none filter-input bg-white px-3 shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#advancedFilters" title="Toggle Filters">
+                                <i class="fas fa-sliders-h text-primary"></i>
+                            </button>
+
                         </div>
-                        <div class="col-md-2">
-                            <select id="filterProg" class="form-select filter-input">
-                                <option value="">All Programmes</option>
-                                <option value="Int. MSc.">Int. MSc.</option><option value="Int. PhD">Int. PhD</option><option value="PhD">PhD</option><option value="PostDoc">PostDoc</option><option value="Faculty">Faculty</option>
-                            </select>
+
+                        <div class="col-12 col-lg-9 collapse d-lg-block" id="advancedFilters">
+                            <div class="row g-2 pt-2 pt-lg-0">
+                                <div class="col-6 col-lg-3">
+                                    <select id="filterProg" class="form-select filter-input shadow-sm">
+                                        <option value="">All Programmes</option>
+                                        <option value="Int. MSc.">Int. MSc.</option><option value="Int. PhD">Int. PhD</option><option value="PhD">PhD</option><option value="PostDoc">PostDoc</option><option value="Faculty">Faculty</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 col-lg-3">
+                                    <select id="filterDept" class="form-select filter-input shadow-sm">
+                                        <option value="">All Depts</option>
+                                        <option value="SBS">SBS</option><option value="SCS">SCS</option><option value="SEPS">SEPS</option><option value="SMS">SMS</option><option value="SPS">SPS</option><option value="SHSS">SHSS</option><option value="CMRP">CMRP</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 col-lg-2"><select id="filterStart" class="form-select filter-input shadow-sm"><option value="">Start Year</option></select></div>
+                                <div class="col-6 col-lg-2"><select id="filterEnd" class="form-select filter-input shadow-sm"><option value="">End Year</option></select></div>
+                                <div class="col-12 col-lg-2"><button id="btnReset" class="btn btn-outline-secondary w-100 bg-white filter-input shadow-sm" title="Reset Filters"><i class="fas fa-undo"></i><span class="d-lg-none ms-2">Reset Filters</span></button></div>
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                            <select id="filterDept" class="form-select filter-input">
-                                <option value="">All Depts</option>
-                                <option value="SBS">SBS</option><option value="SCS">SCS</option><option value="SEPS">SEPS</option><option value="SMS">SMS</option><option value="SPS">SPS</option><option value="SHSS">SHSS</option><option value="CMRP">CMRP</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2"><select id="filterStart" class="form-select filter-input"><option value="">Start Year</option></select></div>
-                        <div class="col-md-2"><select id="filterEnd" class="form-select filter-input"><option value="">End Year</option></select></div>
-                        <div class="col-md-1"><button id="btnReset" class="btn btn-outline-secondary w-100 bg-white filter-input" title="Reset Filters"><i class="fas fa-undo"></i></button></div>
+
                     </div>
                 </div>
 
-                <div class="d-none d-md-flex row px-2 pt-3 mt-2 text-uppercase text-muted small fw-bold mx-0" style="letter-spacing: 0.05em;">
-                    <div class="col-md-4 ps-4">Alumni Profile</div>
-                    <div class="col-md-4">Current Position & Institute</div>
-                    <div class="col-md-4">Contact Info & Links</div>
+                <div class="d-none d-lg-flex row px-2 pt-3 mt-1 text-uppercase text-muted small fw-bold mx-0" style="letter-spacing: 0.05em;">
+                    <div class="col-lg-4 ps-4">Alumni Profile</div>
+                    <div class="col-lg-4">Current Position & Institute</div>
+                    <div class="col-lg-4">Contact Info & Links</div>
                 </div>
                 
             </div>

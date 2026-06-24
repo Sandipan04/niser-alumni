@@ -264,9 +264,13 @@ if (document.getElementById('btnReset')) {
     });
 }
 
+// Sidebar mobile handler
 document.addEventListener('click', (e) => {
-    if (e.target.closest('#sidebarAccordion .nav-link') || e.target.closest('.brand-title')) {
-        if (window.innerWidth < 992 && typeof window.toggleSidebar === 'function') window.toggleSidebar();
+    // Removed .brand-title listener to prevent double-firing the close button
+    if (e.target.closest('#sidebarAccordion .nav-link')) {
+        if (window.innerWidth < 992 && typeof window.toggleSidebar === 'function') {
+            window.toggleSidebar();
+        }
     }
 });
 

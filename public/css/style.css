@@ -254,7 +254,7 @@ textarea.form-control:focus {
     
     .main-content {
         margin-left: 0;
-        height: calc(100dvh - 60px); /* Account for mobile header */
+        height: 100dvh;
     }
     .topbar-wrapper {
         padding: 1rem 1rem 0.5rem 1rem;
