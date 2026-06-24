@@ -50,7 +50,33 @@ export async function onRequestPost(context) {
             data.photo_url || null
         ).run();
 
-        // 5. Return success
+        // 5. Dispatch the real-time Discord Webhook (if configured)
+        if (context.env.DISCORD_WEBHOOK_MAIN) {
+            // Use a green color for JOINs and a yellow/orange color for UPDATEs
+            const typeColor = data.request_type === 'UPDATE' ? 16753920 : 3066993;
+            
+            const embed = {
+                title: `📝 New ${data.request_type || 'JOIN'} Request`,
+                color: typeColor, 
+                fields: [
+                    { name: "Name", value: data.name || "Unknown", inline: true },
+                    { name: "Programme", value: data.programme || "Unknown", inline: true },
+                    { name: "Batch", value: `${data.start_year || ''} - ${data.end_year || 'Present'}`.trim(), inline: true }
+                ],
+                timestamp: new Date().toISOString()
+            };
+
+            // Fire and forget - don't let a Discord failure block the user response
+            context.waitUntil(
+                fetch(context.env.DISCORD_WEBHOOK_MAIN, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ embeds: [embed] })
+                }).catch(err => console.error("Discord Webhook failed", err))
+            );
+        }
+
+        // 6. Return success
         return Response.json({ success: true, message: "Request queued successfully", request_id: requestId });
 
     } catch (error) {
